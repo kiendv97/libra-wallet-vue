@@ -1,3 +1,4 @@
 {
-  "api": "https://libraservice3.kulap.io"
+  "api": "https://libraservice3.kulap.io",
+  "api_local": "http://localhost:3000"
 }

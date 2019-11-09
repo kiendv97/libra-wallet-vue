@@ -2,40 +2,36 @@ const BigNumber = require('bignumber.js')
 const { LibraClient, LibraWallet, LibraAdmissionControlStatus } = require('kulap-libra')
 const axios = require('axios')
 const moment = require('moment')
-
+const apiLocal = 'http://localhost:3000'
 class Libra {
-  libraClient () {
-    return new LibraClient({
-      transferProtocol: 'https',
-      host: 'ac-libra-testnet.kulap.io',
-      port: '443',
-      dataProtocol: 'grpc-web-text'
-    })
-  }
+  // libraClient () {
+  //   return new LibraClient({
+  //     transferProtocol: 'https',
+  //     host: 'ac-libra-testnet.kulap.io',
+  //     port: '443',
+  //     dataProtocol: 'grpc-web-text'
+  //   })
+  // }
 
   async queryBalance (address) {
-    const client = this.libraClient()
-
-    const accountState = await client.getAccountState(address)
-
-    // balance in micro libras
-    const balanceInMicroLibras = BigNumber(accountState.balance.toString(10))
-
-    // balance in base unit
-    const balace = balanceInMicroLibras.dividedBy(BigNumber(1e6))
-
-    return balace.toString(10)
+    const response = await axios.get(`${apiLocal}/api/${address}`)
+    if(response.status !== 200) return ''
+    if(!response || !response.data) return 'failed'
+    return response.data.data
   }
 
   async createWallet () {
     // Generate account
-    const wallet = new LibraWallet()
-    const account = wallet.newAccount()
+    const reponse = await axios.get(`${apiLocal}/api/createWallet`)
+    if(response.status !== 200) return ''
+    if(!response || !response.data) return 'failed'
+    const account = response.data.data
 
     return {
-      address: account.getAddress().toHex(),
-      mnemonic: wallet.config.mnemonic
+      address: account.address,
+      mnemonic: account.mnemonic
     }
+   
   }
 
   async transfer (mnemonic, toAddress, amount) {

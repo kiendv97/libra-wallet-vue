@@ -30,6 +30,7 @@ const english = {
   hardwareWalletInfo: 'More information click',
 
   // Transfer (Component)
+  mnemonicInput: 'Mnenomic input',
   sendManually: 'Send Manually',
   destinationAddress: 'Destination Address',
   amount: 'Amount',

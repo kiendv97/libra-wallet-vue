@@ -8,63 +8,115 @@ import ScanQR from './views/ScanQR'
 import Stats from './views/Stats'
 import PaymentSuccess from './views/PaymentSuccess'
 import About from './views/About'
+import SignUp from './views/SignUp'
+import SignIn from './views/SignIn'
 
 Vue.use(Router)
-
-export default new Router({
+const router =  new Router({
   routes: [
+    
+    {
+      path: '/auth/signup',
+      name: 'Sign Up',
+      component: SignUp
+    },
+    {
+      path: '/auth/signin',
+      name: 'Sign In',
+      component: SignIn
+    },
     {
       path: '/',
       name: 'Wallet',
-      component: Home
+      component: Home,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/send',
       name: 'Send',
-      component: Send
+      component: Send,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/receive',
       name: 'Receive',
-      component: Receive
+      component: Receive,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/scanQR',
       name: 'ScanQR',
-      component: ScanQR
+      component: ScanQR,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/stats',
       name: 'Stats',
-      component: Stats
+      component: Stats,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/transactions',
       name: 'Transactions',
-      component: Transactions
+      component: Transactions,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/paymentSuccess',
       name: 'PaymentSuccess',
-      component: PaymentSuccess
+      component: PaymentSuccess,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/about',
       name: 'About',
-      component: About
+      component: About,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
-      path: '/blog',
-      name: 'Blog',
+      path: '/facebook',
+      name: 'Facebook',
+      meta: {
+        requiresAuth: true
+      },
       beforeEnter (route) {
         const { locale } = route.query
 
         if (locale === 'en') {
-          location.href = 'https://medium.com/kulapofficial/the-first-libra-wallet-poc-building-your-own-wallet-and-apis-3cb578c0bd52'
+          location.href = 'https://www.facebook.com/kien.nguyenvan.1675'
         } else {
-          location.href = 'https://medium.com/kulapofficial/libra-%E0%B8%A1%E0%B8%B2%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%99%E0%B8%AA%E0%B8%81%E0%B8%B8%E0%B8%A5%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99%E0%B8%94%E0%B8%B4%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B8%AD%E0%B8%A5%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88-%E0%B9%82%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99%E0%B8%97%E0%B8%B1%E0%B9%88%E0%B8%A7%E0%B9%82%E0%B8%A5%E0%B8%81%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%99%E0%B8%A7%E0%B8%B4%E0%B8%99%E0%B8%B2%E0%B8%97%E0%B8%B5-%E0%B8%84%E0%B9%88%E0%B8%B2%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%95%E0%B9%88%E0%B8%B3-%E0%B9%82%E0%B8%94%E0%B8%A2-facebook-8517d267717b'
+          location.href = 'https://www.facebook.com/kien.nguyenvan.1675'
         }
       }
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (localStorage.getItem('token_wallet')) {
+      next()
+      return
+    }
+    next("/auth/signin")
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -8,13 +8,11 @@ export default new Vuex.Store({
     userAddress: '',
     userAddressShort: '',
     balance: '',
-    mnemonic: '',
     toAddress: '',
-    AMOUNT_TO_MINT: '1000'
   },
   actions: {
-    updateUserData ({ commit }, { userAddress, userAddressShort, balance, mnemonic }) {
-      commit('updateUserData', { userAddress, userAddressShort, balance, mnemonic })
+    updateUserData ({ commit }, { userAddress, userAddressShort, balance }) {
+      commit('updateUserData', { userAddress, userAddressShort, balance })
     },
     updateBalance ({ commit }, balance) {
       commit('updateBalance', balance)
@@ -24,11 +22,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    updateUserData (state, { userAddress, userAddressShort, balance, mnemonic }) {
+    updateUserData (state, { userAddress, userAddressShort, balance }) {
       state.userAddress = userAddress
       state.userAddressShort = userAddressShort
       state.balance = balance
-      state.mnemonic = mnemonic
     },
     updateBalance (state, payload) {
       state.balance = payload

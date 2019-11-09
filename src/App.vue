@@ -64,6 +64,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url('https://libra.org/en-US/wp-content/uploads/sites/23/2019/06/desktop-home-hero-gradient.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
 }
 #nav {
   padding: 30px 5px;
@@ -97,4 +101,5 @@ export default {
     padding: 30px;
   }
 }
+
 </style>

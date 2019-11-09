@@ -6,24 +6,20 @@ class UserDataPersistance {
     if (lcstore.get('userAddress') !== undefined) {
       this.userAddress = lcstore.get('userAddress')
       this.balance = lcstore.get('balance')
-      this.mnemonic = lcstore.get('mnemonic')
     } else {
       this.userAddress = ''
       this.balance = ''
-      this.mnemonic = ''
     }
   }
 
-  update (userAddress, balance, mnemonic) {
+  update (userAddress, balance) {
     this.userAddress = userAddress
     this.balance = balance
-    this.mnemonic = mnemonic
   }
 
   save () {
     lcstore.set('userAddress', this.userAddress)
     lcstore.set('balance', this.balance)
-    lcstore.set('mnemonic', this.mnemonic)
   }
 
   updateUserBalance (balance) {

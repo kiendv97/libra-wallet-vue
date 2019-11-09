@@ -25,6 +25,14 @@
             />
           </b-field>
         </div>
+         <div class="input-box">
+          <b-field :label="$t('mnemonicInput')">
+            <b-input :disabled="!editable"
+              v-model="mnemonic"
+              :placeholder="$t('mnemonicInput')"
+            />
+          </b-field>
+        </div>
         <div class="input-box">
           <b-field :label="$t('amount')">
             <b-input :disabled="!editable"
@@ -67,6 +75,7 @@ export default {
       labelValue: '',
       editable: true,
       isTransfering: false,
+      mnemonic: '',
       libra: new LibraService()
     }
   },
@@ -74,9 +83,6 @@ export default {
     VueElementLoading
   },
   created () {
-    if (!this.mnemonic) {
-      this.$router.push({ name: 'Wallet' })
-    }
     if (this.$route.query) {
       if (this.$route.query.to) {
         this.address = this.$route.query.to
@@ -98,8 +104,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userAddress: state => state.userAddress,
-      mnemonic: state => state.mnemonic
+      userAddress: state => state.userAddress
     })
   },
   methods: {
@@ -115,9 +120,9 @@ export default {
 
       this.isTransfering = true
       try {
-        const mnemonic = this.mnemonic.split(';')[0]
         const toAddress = this.address
-        await this.libra.transfer(mnemonic, toAddress, this.amount)
+        const mnemonicInput  = this.mnemonic
+        await this.libra.transfer(mnemonicInput, toAddress, this.amount)
         // Fire event to Google Analytic
         this.$ga.event({
           eventCategory: 'Transaction',

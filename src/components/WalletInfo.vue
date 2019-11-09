@@ -17,27 +17,6 @@
         >
           {{ $t('copyToClipboard') }}
         </b-button>
-        <social-sharing
-          :url="shareUrl"
-          :title="shareText"
-          :description="shareText"
-          :quote="shareText"
-          class="card-footer-item share"
-          hashtags="Libra,Blockchain,Kulap"
-          twitter-user="kulap"
-          inline-template
-        >
-          <div>
-            <network
-              network="facebook"
-              class="share-facebook-btn"
-            >
-              <b-button icon-left="facebook">
-                {{ $t('shareYourWallet') }}
-              </b-button>
-            </network>
-          </div>
-        </social-sharing>
         <b-button
           icon-left="arrow-left"
           @click="back"
