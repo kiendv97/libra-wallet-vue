@@ -6,7 +6,7 @@
 
   <form class="login-container">
     <p><input type="password" placeholder="Password" v-model="password"></p>
-    <p><input @click="submit" value="Sign Up"></p>
+    <p><input type="button" @click="submit" value="Sign Up"></p>
   </form>
 </div>
 </template>

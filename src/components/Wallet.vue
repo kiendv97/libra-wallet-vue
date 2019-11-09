@@ -118,19 +118,19 @@ export default {
       })
       await this.queryBalance()
 
-      // Mint if balance = 0
-      try {
-        if (parseInt(this.balance) === 0) {
-          console.log('balance is 0')
-          await this.mint('100', this.userAddress)
+      // // Mint if balance = 0
+      // try {
+      //   if (parseInt(this.balance) === 0) {
+      //     console.log('balance is 0')
+      //     await this.mint('100', this.userAddress)
 
-          setTimeout(async () => {
-            await this.queryBalance()
-          }, 1000)
-        }
-      } catch (error) {
-        console.log(error)
-      }
+      //     setTimeout(async () => {
+      //       await this.queryBalance()
+      //     }, 1000)
+      //   }
+      // } catch (error) {
+      //   console.log(error)
+      // }
     }
   },
   computed: {
@@ -155,11 +155,12 @@ export default {
       await this.queryBalance()
       this.isQueryBalance = false
     },
-    async mint (amount, address) {
-      const { data } = await axios.post(config.api + '/mint', { address: address, amount: amount })
-      return data
-    },
+    // async mint (amount, address) {
+    //   const { data } = await axios.post(config.api + '/mint', { address: address, amount: amount })
+    //   return data
+    // },
     async queryBalance () {
+      // api dev.kulap.io
       const { data } = await axios.post(config.api + '/getBalance', { address: this.userAddress })
       this.updateBalance(data.balance)
       this.userData.updateUserBalance(data.balance)
