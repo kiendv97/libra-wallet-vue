@@ -53,6 +53,12 @@
             {{ $t('send') }}
           </b-button>
           <b-button
+            icon-left="gift"
+            @click="minting"
+          >
+            {{ $t('mint') }}
+          </b-button>
+           <b-button
             icon-left="qrcode"
             @click="openReceive"
           >
@@ -113,7 +119,6 @@ export default {
     if (this.userData.userAddress) {
       this.updateUserData({
         userAddress: this.userData.userAddress,
-        userAddressShort: this.userData.userAddress.substring(0, 5),
         balance: this.userData.balance
       })
       await this.queryBalance()
@@ -161,7 +166,7 @@ export default {
     // },
     async queryBalance () {
       // api dev.kulap.io
-      const { data } = await axios.post(config.api + '/getBalance', { address: this.userAddress })
+      const { data } = await this.libra.queryBalance(this.userAddress)
       this.updateBalance(data.balance)
       this.userData.updateUserBalance(data.balance)
       return data
@@ -169,6 +174,13 @@ export default {
     async updatePersistance (userAddress, balance) {
       this.userData.update(userAddress, balance)
       this.userData.save()
+    },
+    minting () {
+      this.$ga.event({
+        eventCategory: 'Wallet',
+        eventAction: 'Minting'
+      })
+      this.$router.push({ name: 'Minting' })
     },
     openSend () {
       this.$ga.event({
@@ -326,15 +338,12 @@ export default {
   .button-box {
     margin-top: 60px;
     button {
-      width: 40%;
-      height: 60px;
-      max-width: 300px;
+      width: 25%;
+      height: 60%;
+      max-width: 200px;
     }
-    button:first-child {
+    button {
       margin-right: 15px;
-    }
-    button:last-child {
-      margin-left: 15px;
     }
   }
   .wallet-content {

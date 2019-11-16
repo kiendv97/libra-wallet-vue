@@ -23,6 +23,7 @@ const english = {
   creatingWallet: 'Creating your wallet ...',
   clickToRefresh: 'Click to refresh',
   send: 'Send',
+  mint: 'Mint',
   receive: 'Receive',
   transactionHistory: 'Transaction History',
   refreshing: 'Refreshing ...',

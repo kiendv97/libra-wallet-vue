@@ -60,6 +60,7 @@ import { mapActions, mapState } from 'vuex'
 import config from '@/config.json'
 import axios from 'axios'
 import UserDataPersistance from '@/userData/persistance'
+import LibraService from '@/service/libra_service.js'
 
 export default {
   name: 'Wallet',
@@ -70,7 +71,8 @@ export default {
       window: {
         width: 0,
         height: 0
-      }
+      },
+      libra: new LibraService()
     }
   },
   computed: {
@@ -99,10 +101,9 @@ export default {
       try {
         const payload = { address: this.userAddress || this.userData.userAddress }
 
-        const { data } = await axios.post(config.api + '/transactionHistory', payload)
-
+        const data = await this.libra.queryTransactionHistory(this.userAddress)
         console.log(data)
-        this.transactions = data.transactions
+        this.transactions = data.data
         this.fetched = true
       } catch (error) {
         console.log(error)

@@ -10,6 +10,7 @@ import PaymentSuccess from './views/PaymentSuccess'
 import About from './views/About'
 import SignUp from './views/SignUp'
 import SignIn from './views/SignIn'
+import Minting from './views/Minting'
 
 Vue.use(Router)
 const router =  new Router({
@@ -29,6 +30,14 @@ const router =  new Router({
       path: '/',
       name: 'Wallet',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/minting',
+      name: 'Minting',
+      component: Minting,
       meta: {
         requiresAuth: true
       }

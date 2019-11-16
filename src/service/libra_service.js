@@ -15,10 +15,17 @@ class Libra {
 
   async queryBalance (address) {
     try {
-      const response = await axios.get(`${apiLocal}/api/${address}`)
+      const response = await axios.request({
+        url: `${apiLocal}/api/getBalance?address=${address}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token_wallet')}`
+        }
+      })
     if(response.status !== 200) return ''
     if(!response || !response.data) return 'failed'
-    return response.data.data.result
+    return response.data
     } catch (error) {
       return error
     }
@@ -46,7 +53,19 @@ class Libra {
 
   async transfer (mnemonic, toAddress, amount) {
     try {
-      const response = await axios.get(`${apiLocal}/api/transfer`)
+      const response = await axios.request({
+        url: `${apiLocal}/api/transfer`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token_wallet')}`
+        },
+        data: {
+          mnemonic: mnemonic,
+          toAddress: toAddress,
+          amount: amount
+        }
+      })
     if(response !== 200) return {}
     return {
       response: response.data,
@@ -58,23 +77,40 @@ class Libra {
     
   }
 
-  // async mint (address, amount) {
-  //   const client = this.libraClient()
-
-  //   // Mint 100 Libra coins
-  //   const result = await client.mintWithFaucetService(address, BigNumber(amount).times(1e6).toString(10))
-
-  //   return {
-  //     result: result,
-  //     address: address,
-  //     amount: BigNumber(amount).toString(10)
-  //   }
-  // }
+  async mint (address, amount) {
+    try {
+      const response = await axios.request({
+        url: `${apiLocal}/api/mint`,
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token_wallet')}`
+        },
+        data: {
+          address: address,
+          amount: amount
+        }
+      })
+      if(response.status !== 200) return {status: false}
+      return {
+        status: true
+      }
+      } catch (error) {
+        return {status: false, error: error}
+      }
+  }
 
   async queryTransactionHistory (address) {
     try {
-    const response = await axios.get(`${apiLocal}/api/queryTransactionHistory`)
-    if(!response.status !== 200) return ''
+    const response = await axios.request({
+      url: `${apiLocal}/api/queryTransactionHistory?address=${address}`,
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token_wallet')}`
+      }
+    })
+    if(response.status !== 200) return 'test'
     return response.data
     } catch (error) {
       return error
