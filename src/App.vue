@@ -17,7 +17,7 @@
           <b-icon icon="menu-down"></b-icon>
         </div>
         <b-dropdown-item aria-role="listitem" @click="switchLocale('en')">English (EN)</b-dropdown-item>
-        <b-dropdown-item aria-role="listitem" @click="switchLocale('th')">ไทย (TH)</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem" @click="switchLocale('vn')">VietNam (VN)</b-dropdown-item>
       </b-dropdown>
     </div>
     <router-link to="/">
@@ -59,11 +59,12 @@ export default {
 
 <style scoped>
 #app {
+  height: 900px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #f5f5f5;
   background-image: url('https://libra.org/en-US/wp-content/uploads/sites/23/2019/06/desktop-home-hero-gradient.jpg');
   background-repeat: no-repeat;
   background-size: cover;

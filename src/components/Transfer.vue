@@ -7,7 +7,7 @@
       :text="$t('transfering')"
       is-full-screen
     />
-    <section class="wallet-container hero is-medium is-primary is-bold">
+    <section class="wallet-container">
       <div class="wallet-body">
         <div v-if="labelHead !== ''" class="input-box">
           <b-field :label="labelHead">
@@ -180,8 +180,10 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+.hero.is-primary {
+    color: white;
+}
 .wallet-container {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   min-height: calc(100vh - 170px);
   width: 100%;
   margin: 0 auto;

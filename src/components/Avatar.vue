@@ -1,5 +1,5 @@
 <template>
-  <div ref="avatar"/>
+  <div @click="logoutTemp()" ref="avatar"/>
 </template>
 
 <script>
@@ -26,6 +26,15 @@ export default {
     this.$nextTick(() => {
       this.$refs.avatar.appendChild(icon)
     })
+  },
+  methods: {
+    logoutTemp() {
+      delete localStorage.userAddress;
+      delete localStorage.token_wallet;
+      delete localStorage.balance;
+      this.$router.push('/auth/signin');
+    }
   }
+  
 }
 </script>

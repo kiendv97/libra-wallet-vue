@@ -1,5 +1,5 @@
 <template>
-  <section class="wallet-container hero is-medium is-primary is-bold">
+  <section class="wallet-container">
     <div class="wallet-body">
       <div
         v-if="!userAddress"
@@ -239,8 +239,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .wallet-container {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   // min-height: calc(100vh - 170px);
   width: 100%;
   margin: 0 auto;

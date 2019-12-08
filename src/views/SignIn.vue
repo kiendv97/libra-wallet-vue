@@ -1,5 +1,5 @@
 <template>
-  <div class="sign in">
+  <div class="home">
     <SignIn/>
   </div>
 </template>
@@ -9,7 +9,7 @@
 import SignIn from '@/components/SignIn'
 
 export default {
-  name: 'signin',
+  name: 'home',
   components: {
     SignIn
   }

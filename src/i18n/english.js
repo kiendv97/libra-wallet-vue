@@ -4,7 +4,7 @@ const english = {
   copy: 'Copied!',
   cantCopy: 'Can\'t copy!',
   loading: 'Loading ...',
-  libracampGrantPlan: 'A Libracamp grant plan project.',
+  libracampGrantPlan: 'Phiên bản thử nghiệm (TESTNET LIBRA BY FB)',
 
   // Home (Views)
   home: 'Home',
@@ -56,8 +56,15 @@ const english = {
   transactions: 'Transactions',
 
   // Footer (Component)
-  sponsored: 'Sponsored',
-  by: 'by'
+  sponsored: 'Based on',
+  by: 'by',
+  // Sign up sign in
+  signup: "Register",
+  signin: "Sign in",
+  download: "Download File Token",
+  directLogin: "Forward to Login page if own accont",
+  directRegister: "Forward to Register page if not own accont",
+  logout: "Logout"
 }
 
 export default english
